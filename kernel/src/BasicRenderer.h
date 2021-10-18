@@ -2,10 +2,9 @@
 // Created by Jake on 10/10/21.
 //
 #pragma once
-#include "math.h"
 #include "FrameBuffer.h"
 #include "simpleFonts.h"
-#include <cstdint>
+#include "math.h"
 
 #define BPP 4
 #define OVER_SCAN 3

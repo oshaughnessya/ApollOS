@@ -3,10 +3,8 @@
 //
 
 #pragma once
-#include <cstdint>
-#include "../memory/efiMemory.h"
 #include "../Bitmap.h"
-#include "../memory/memory.h"
+#include "../memory/efiMemory.h"
 
 class PageFrameAllocator {
 public:

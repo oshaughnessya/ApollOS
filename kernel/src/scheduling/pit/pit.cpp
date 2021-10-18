@@ -3,6 +3,7 @@
 //
 
 #include "pit.h"
+#include "../../IO.h"
 
 namespace PIT {
     uint64_t TimeSinceBoot = 0;

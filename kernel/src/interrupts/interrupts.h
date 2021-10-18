@@ -3,11 +3,7 @@
 //
 
 #pragma once
-#include "../BasicRenderer.h"
-#include "../panic.h"
-#include "../IO.h"
-#include "../userinput/keyboard.h"
-#include "../scheduling/pit/pit.h"
+
 
 #define PIC1_COMMAND 0x20
 #define PIC1_DATA 0x21

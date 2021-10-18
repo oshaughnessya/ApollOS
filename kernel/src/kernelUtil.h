@@ -5,20 +5,9 @@
 #pragma once
 #include "FrameBuffer.h"
 #include "simpleFonts.h"
-#include "BasicRenderer.h"
-#include "cstr.h"
 #include "memory/efiMemory.h"
-#include "memory/memory.h"
-#include "Bitmap.h"
-#include "paging/paging.h"
-#include "paging/PageFrameAllocator.h"
-#include "paging/PageTableManager.h"
-#include "gdt/gdt.h"
-#include "interrupts/IDT.h"
-#include "interrupts/interrupts.h"
 #include "pci/acpi.h"
-#include "pci/pci.h"
-#include "memory/heap.h"
+#include "BasicRenderer.h"
 
 struct BootInfo {
     Framebuffer* framebuffer;

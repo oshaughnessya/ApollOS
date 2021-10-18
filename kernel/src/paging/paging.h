@@ -3,7 +3,6 @@
 //
 
 #pragma once
-
 #include <cstdint>
 
 enum PT_Flag {

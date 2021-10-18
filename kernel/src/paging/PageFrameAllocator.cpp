@@ -3,6 +3,7 @@
 //
 
 #include "PageFrameAllocator.h"
+#include "../memory/memory.h"
 
 #define EFI_CONVENTIONAL_MEMORY 7
 

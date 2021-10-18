@@ -3,6 +3,7 @@
 //
 
 #include "BasicRenderer.h"
+#include <cstdint>
 
 BasicRenderer* GlobalRenderer;
 

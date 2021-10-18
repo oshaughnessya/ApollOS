@@ -2,7 +2,6 @@
 // Created by Jake on 10/13/21.
 //
 #pragma once
-
 #include <cstdint>
 #include "efiMemory.h"
 

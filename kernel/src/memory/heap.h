@@ -3,10 +3,7 @@
 //
 
 #pragma once
-#include <cstdint>
 #include <cstddef>
-#include "../paging/PageTableManager.h"
-#include "../paging/PageFrameAllocator.h"
 
 struct HeapSegHdr {
     size_t length;

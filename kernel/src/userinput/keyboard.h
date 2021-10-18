@@ -4,7 +4,5 @@
 
 #pragma once
 #include <cstdint>
-#include "kbScanCodeTranslation.h"
-#include "../BasicRenderer.h"
 
 void HandleKeyboard(uint8_t scancode);

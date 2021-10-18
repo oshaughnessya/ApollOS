@@ -3,6 +3,16 @@
 //
 
 #include "kernelUtil.h"
+#include "paging/PageFrameAllocator.h"
+#include "paging/PageTableManager.h"
+#include "memory/memory.h"
+#include "interrupts/IDT.h"
+#include "interrupts/interrupts.h"
+#include "scheduling/pit/pit.h"
+#include "pci/pci.h"
+#include "gdt/gdt.h"
+#include "memory/heap.h"
+#include "IO.h"
 
 void PrepareMemory(BootInfo* bootInfo) {
     GlobalAllocator = PageFrameAllocator();

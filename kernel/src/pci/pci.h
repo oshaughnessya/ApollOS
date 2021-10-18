@@ -5,9 +5,6 @@
 #pragma once
 #include <cstdint>
 #include "acpi.h"
-#include "../paging/PageTableManager.h"
-#include "../BasicRenderer.h"
-#include "../cstr.h"
 
 namespace PCI {
     struct PCIDeviceHeader {

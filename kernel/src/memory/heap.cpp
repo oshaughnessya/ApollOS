@@ -3,6 +3,8 @@
 //
 
 #include "heap.h"
+#include "../paging/PageTableManager.h"
+#include "../paging/PageFrameAllocator.h"
 
 void* heapStart;
 void* heapEnd;

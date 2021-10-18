@@ -4,7 +4,6 @@
 
 #pragma once
 #include <cstdint>
-#include "BasicRenderer.h"
 
 const char* to_string(uint64_t value);
 const char* to_hstring(uint64_t value);

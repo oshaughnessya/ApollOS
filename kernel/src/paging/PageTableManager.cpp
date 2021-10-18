@@ -3,6 +3,9 @@
 //
 
 #include "PageTableManager.h"
+#include "PageMapIndexer.h"
+#include "PageFrameAllocator.h"
+#include "../memory/memory.h"
 
 PageTableManager GlobalPageTableManager = nullptr;
 

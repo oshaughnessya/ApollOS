@@ -3,6 +3,8 @@
 //
 
 #include "keyboard.h"
+#include "kbScanCodeTranslation.h"
+#include "../BasicRenderer.h"
 
 bool isLeftShiftPressed = false;
 bool isRightShiftPressed = false;

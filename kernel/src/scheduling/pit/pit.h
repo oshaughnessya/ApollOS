@@ -4,7 +4,6 @@
 
 #pragma once
 #include <cstdint>
-#include "../../IO.h"
 
 namespace PIT {
     extern uint64_t TimeSinceBoot;

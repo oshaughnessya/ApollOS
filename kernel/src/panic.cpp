@@ -3,6 +3,7 @@
 //
 
 #include "panic.h"
+#include "BasicRenderer.h"
 
 __attribute__((no_caller_saved_registers)) void Panic(const char* panicMessage) {
     GlobalRenderer->BackgroundColor = 0x00ff0000;

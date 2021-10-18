@@ -3,6 +3,8 @@
 //
 
 #include "ahci.h"
+#include "../BasicRenderer.h"
+#include "../paging/PageTableManager.h"
 
 namespace AHCI {
 

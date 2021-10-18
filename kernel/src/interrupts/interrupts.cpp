@@ -3,6 +3,11 @@
 //
 
 #include "interrupts.h"
+#include "../panic.h"
+#include <cstdint>
+#include "../IO.h"
+#include "../userinput/keyboard.h"
+#include "../scheduling/pit/pit.h"
 
 // TODO: add debug info once more string utilities are made
 // TODO: try to recover

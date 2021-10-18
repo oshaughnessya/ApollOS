@@ -3,11 +3,7 @@
 //
 
 #pragma once
-
-#include <cstdint>
 #include "paging.h"
-#include "PageMapIndexer.h"
-#include "PageFrameAllocator.h"
 
 class PageTableManager {
 public:

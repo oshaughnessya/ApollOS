@@ -3,6 +3,8 @@
 //
 
 #include "pci.h"
+#include "../paging/PageTableManager.h"
+#include "../BasicRenderer.h"
 #include "../ahci/ahci.h"
 #include "../memory/heap.h"
 
