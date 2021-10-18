@@ -16,10 +16,11 @@ namespace AHCI {
 #define SATA_SIG_PM 0x96690101
 
 
+    // FIXME: probably dereferencing a null pointer
     PortType CheckPortType(HBAPort* port) {
         uint32_t sataStatus = port->sataStatus;
 
-        GlobalRenderer->Print("test");
+
         uint8_t  interfacePowerManagement = (sataStatus >> 8) & 0b111;
         uint8_t deviceDetection = sataStatus & 0b111;
         if (deviceDetection != HBA_PORT_DEV_PRESENT || interfacePowerManagement != HBA_PORT_IPM_ACTIVE) {

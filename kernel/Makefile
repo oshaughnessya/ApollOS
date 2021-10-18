@@ -1,5 +1,5 @@
 
-OSNAME = CustomOS
+OSNAME = ApollOS
 
 GNUEFI = ../gnu-efi
 OVMFDIR = ../OVMFbin
