@@ -1,5 +1,0 @@
-/gnu-efi/x86_64/
-*.o
-/kernel/bin/kernel.elf
-/kernel/bin/ApollOS.img
-/.idea
