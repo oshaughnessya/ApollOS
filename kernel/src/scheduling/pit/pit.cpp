@@ -35,7 +35,7 @@ namespace PIT {
         SetDivisor(BaseFrequency / frequency);
     }
 
-    __attribute__((no_caller_saved_registers)) void Tick() {
+    void Tick() {
         TimeSinceBoot += 1000 / GetFrequency();
     }
 }

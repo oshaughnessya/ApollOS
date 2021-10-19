@@ -14,5 +14,5 @@ namespace PIT {
     void SetDivisor(uint16_t divisor);
     uint64_t GetFrequency();
     void SetFrequency(uint64_t frequency);
-    __attribute__((no_caller_saved_registers)) void Tick();
+    void Tick();
 }

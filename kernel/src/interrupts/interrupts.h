@@ -18,12 +18,12 @@
 
 struct interrupt_frame;
 
-[[noreturn]] __attribute__((interrupt)) void PageFault_Handler(interrupt_frame* frame);
+[[noreturn]] __attribute__((interrupt)) __attribute__((no_caller_saved_registers)) void PageFault_Handler(interrupt_frame* frame);
 [[noreturn]] __attribute__((interrupt)) void DoubleFault_Handler(interrupt_frame* frame);
-[[noreturn]] __attribute__((interrupt)) void GPFault_Handler(interrupt_frame* frame);
-__attribute__((interrupt)) void KeyboardInt_Handler(interrupt_frame* frame);
-__attribute__((interrupt)) void PITInt_Handler(interrupt_frame* frame);
+[[noreturn]] __attribute__((interrupt)) __attribute__((no_caller_saved_registers)) void GPFault_Handler(interrupt_frame* frame);
+__attribute__((interrupt)) __attribute__((no_caller_saved_registers)) void KeyboardInt_Handler(interrupt_frame* frame);
+__attribute__((interrupt)) __attribute__((no_caller_saved_registers)) void PITInt_Handler(interrupt_frame* frame);
 
 void RemapPIC();
-__attribute__((no_caller_saved_registers)) void PIC_EndMater();
-__attribute__((no_caller_saved_registers)) void PIC_EndSlave();
+void PIC_EndMater();
+void PIC_EndSlave();
