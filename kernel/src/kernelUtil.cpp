@@ -67,29 +67,10 @@ void PrepareInterrupts() {
 }
 
 void PrepareACPI(BootInfo* bootInfo) {
-    // check rsdp before using TODO: check in bootlaoder too
-    uint8_t sum = 0;
-    for (int i = 0; i < bootInfo->rsdp->Length; i++) {
-        sum += ((uint8_t*)bootInfo->rsdp)[i];
-    }
-
-    if (sum != 0) {
-        return;
-    }
 
     ACPI::SDTHeader* xsdt = (ACPI::SDTHeader*)(bootInfo->rsdp->XSDTAddress);
 
     ACPI::MCFGHeader* mcfg = (ACPI::MCFGHeader*)ACPI::FindTable(xsdt, (char*)"MCFG");
-
-    // verify mcfg
-    for (int i = 0; i < mcfg->Header.Length; i++) {
-        sum += ((uint8_t*)mcfg)[i];
-    }
-    sum &= 0xff;
-
-    if (sum != 0) {
-        return;
-    }
 
     PCI::EnumeratePCI(mcfg);
 }

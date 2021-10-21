@@ -8,7 +8,7 @@ CC = gcc
 ASMC = nasm
 LD = ld.gold
 
-CFLAGS = -ffreestanding -fshort-wchar -mgeneral-regs-only -mno-red-zone -g -fno-exceptions
+CFLAGS = -ffreestanding -fshort-wchar -mgeneral-regs-only -mno-red-zone -g -fno-exceptions -fno-stack-protector
 ASMFLAGS =
 LDFLAGS = -T $(LDS) -static -Bsymbolic -nostdlib
 
@@ -62,7 +62,7 @@ clean:
 	rm -f $(OBJS) $(BUILDDIR)/$(OSNAME).img $(BUILDDIR)/kernel.elf
 
 run:
-	qemu-system-x86_64 -machine q35 -drive file=$(BUILDDIR)/$(OSNAME).img -m 256M -cpu qemu64 -drive if=pflash,format=raw,unit=0,file="$(OVMFDIR)/OVMF_CODE-pure-efi.fd",readonly=on -drive if=pflash,format=raw,unit=1,file="$(OVMFDIR)/OVMF_VARS-pure-efi.fd" -net none
+	qemu-system-x86_64 -machine q35 -drive file=$(BUILDDIR)/$(OSNAME).img,format=raw,index=0,media=disk -m 256M -cpu qemu64 -drive if=pflash,format=raw,unit=0,file="$(OVMFDIR)/OVMF_CODE-pure-efi.fd",readonly=on -drive if=pflash,format=raw,unit=1,file="$(OVMFDIR)/OVMF_VARS-pure-efi.fd" -net none
 
 debug:
-	qemu-system-x86_64 -S -s -M smm=off -d int -machine q35 -drive file=$(BUILDDIR)/$(OSNAME).img -m 256M -cpu qemu64 -drive if=pflash,format=raw,unit=0,file="$(OVMFDIR)/OVMF_CODE-pure-efi.fd",readonly=on -drive if=pflash,format=raw,unit=1,file="$(OVMFDIR)/OVMF_VARS-pure-efi.fd" -net none
+	qemu-system-x86_64 -trace ahci* -S -s -M smm=off -d int -machine q35 -drive file=$(BUILDDIR)/$(OSNAME).img,format=raw,index=0,media=disk -m 256M -cpu qemu64 -drive if=pflash,format=raw,unit=0,file="$(OVMFDIR)/OVMF_CODE-pure-efi.fd",readonly=on -drive if=pflash,format=raw,unit=1,file="$(OVMFDIR)/OVMF_VARS-pure-efi.fd" -net none

@@ -5,10 +5,10 @@
 #include "paging.h"
 
 void PageDirectoryEntry::SetFlag(PT_Flag flag, bool enabled) {
-    uint64_t bitSelection = (uint64_t)1 << flag;
-    value &= ~bitSelection;
+    uint64_t bitSelector = (uint64_t)1 << flag;
+    value &= ~bitSelector;
     if (enabled) {
-        value |= bitSelection;
+        value |= bitSelector;
     }
 }
 

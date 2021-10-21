@@ -8,7 +8,7 @@ LoadGDT:
     mov gs, ax
     mov ss, ax
     pop rdi
-    mov rax, 0x08
+    mov rax, 0x08 ; TODO: push imm8 exists
     push rax
     push rdi
     retfq

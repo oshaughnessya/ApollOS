@@ -11,7 +11,7 @@
 
 // TODO: add debug info once more string utilities are made
 // TODO: try to recover
-[[noreturn]] __attribute__((interrupt)) __attribute__((no_caller_saved_registers)) void PageFault_Handler(interrupt_frame* frame) {
+[[noreturn]] __attribute__((interrupt)) void PageFault_Handler(interrupt_frame* frame) {
     Panic("Page fault detected \n");
 
     while (true) {
@@ -28,7 +28,7 @@
 }
 
 // TODO: try to recover
-[[noreturn]] __attribute__((interrupt)) __attribute__((no_caller_saved_registers)) void GPFault_Handler(interrupt_frame* frame) {
+[[noreturn]] __attribute__((interrupt)) void GPFault_Handler(interrupt_frame* frame) {
     Panic("General Protection fault detected \n");
 
     while (true) {
@@ -36,13 +36,13 @@
     }
 }
 
-__attribute__((interrupt)) __attribute__((no_caller_saved_registers)) void KeyboardInt_Handler(interrupt_frame* frame) {
+__attribute__((interrupt)) void KeyboardInt_Handler(interrupt_frame* frame) {
     uint8_t scancode = inb(0x60);
     HandleKeyboard(scancode);
     PIC_EndMater();
 }
 
-__attribute__((interrupt)) __attribute__((no_caller_saved_registers)) void PITInt_Handler(interrupt_frame* frame) {
+__attribute__((interrupt)) void PITInt_Handler(interrupt_frame* frame) {
     PIT::Tick();
     PIC_EndMater();
 }

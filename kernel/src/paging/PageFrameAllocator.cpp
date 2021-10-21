@@ -74,6 +74,8 @@ void* PageFrameAllocator::RequestPage() {
     return NULL; // TODO: Page frame Swap to file
 }
 
+// TODO: add PageFrameAllocator::RequestPages()
+
 void PageFrameAllocator::FreePage(void* address) {
     uint64_t index = (uint64_t)address / 4096;
     if (!PageBitmap[index]) return;

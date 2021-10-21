@@ -4,7 +4,6 @@
 
 #pragma once
 
-
 #define PIC1_COMMAND 0x20
 #define PIC1_DATA 0x21
 #define PIC2_COMMAND 0xA0
@@ -18,11 +17,11 @@
 
 struct interrupt_frame;
 
-[[noreturn]] __attribute__((interrupt)) __attribute__((no_caller_saved_registers)) void PageFault_Handler(interrupt_frame* frame);
+[[noreturn]] __attribute__((interrupt)) void PageFault_Handler(interrupt_frame* frame);
 [[noreturn]] __attribute__((interrupt)) void DoubleFault_Handler(interrupt_frame* frame);
-[[noreturn]] __attribute__((interrupt)) __attribute__((no_caller_saved_registers)) void GPFault_Handler(interrupt_frame* frame);
-__attribute__((interrupt)) __attribute__((no_caller_saved_registers)) void KeyboardInt_Handler(interrupt_frame* frame);
-__attribute__((interrupt)) __attribute__((no_caller_saved_registers)) void PITInt_Handler(interrupt_frame* frame);
+[[noreturn]] __attribute__((interrupt)) void GPFault_Handler(interrupt_frame* frame);
+__attribute__((interrupt)) void KeyboardInt_Handler(interrupt_frame* frame);
+__attribute__((interrupt)) void PITInt_Handler(interrupt_frame* frame);
 
 void RemapPIC();
 void PIC_EndMater();

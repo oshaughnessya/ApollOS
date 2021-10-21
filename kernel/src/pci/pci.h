@@ -23,7 +23,7 @@ namespace PCI {
         uint8_t LatencyTimer;
         uint8_t HeaderType;
         uint8_t BIST;
-    };
+    } __attribute__((packed));
 
     struct PCIHeader0 {
         PCIDeviceHeader Header;
@@ -45,7 +45,7 @@ namespace PCI {
         uint8_t InterruptPin;
         uint8_t MinGrant;
         uint8_t MaxLatency;
-    };
+    } __attribute__((packed));
 
     void EnumeratePCI(ACPI::MCFGHeader* mcfg);
 
