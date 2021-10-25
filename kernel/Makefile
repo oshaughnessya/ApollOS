@@ -8,7 +8,7 @@ CC = gcc
 ASMC = nasm
 LD = ld.gold
 
-CFLAGS = -ffreestanding -fshort-wchar -mgeneral-regs-only -mno-red-zone -g -fno-exceptions -fno-stack-protector
+CFLAGS = -ffreestanding -fshort-wchar -mgeneral-regs-only -mno-red-zone -g -fno-exceptions -fno-stack-protector -fno-rtti
 ASMFLAGS =
 LDFLAGS = -T $(LDS) -static -Bsymbolic -nostdlib
 

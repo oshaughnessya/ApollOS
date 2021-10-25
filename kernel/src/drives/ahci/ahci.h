@@ -3,8 +3,8 @@
 //
 
 #pragma once
-#include <cstdint>
-#include "../pci/pci.h"
+#include "../../pci/pci.h"
+#include "../Drive.h"
 
 namespace AHCI {
 
@@ -134,16 +134,16 @@ namespace AHCI {
         uint8_t rsv1[4];
     } __attribute__((packed));
 
-    class Port {
+    class Port: public Drive {
     public:
         HBAPort* hbaPort;
         PortType portType;
-        uint8_t* buffer;
         uint8_t portNumber;
         void Configure();
         void StopCMD();
         void StartCMD();
-        bool Read(uint64_t sector, uint32_t sectorCount, void* buffer);
+        void* Read(uint64_t sector, uint32_t sectorCount);
+        bool Write(uint64_t sector, void* buffer);
     };
 
     class AHCIDriver {

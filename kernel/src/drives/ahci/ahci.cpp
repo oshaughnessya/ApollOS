@@ -3,13 +3,13 @@
 //
 
 #include "ahci.h"
-#include "../BasicRenderer.h"
-#include "../paging/PageTableManager.h"
-#include "../memory/heap.h"
-#include "../paging/PageFrameAllocator.h"
-#include "../memory/memory.h"
+#include "../../BasicRenderer.h"
+#include "../../paging/PageTableManager.h"
+#include "../../memory/heap.h"
+#include "../../paging/PageFrameAllocator.h"
+#include "../../memory/memory.h"
 
-#include "../cstr.h"
+#include "../../cstr.h"
 
 namespace AHCI {
 
@@ -102,12 +102,17 @@ namespace AHCI {
         hbaPort->commandStatus |= HBA_PxCMD_ST;
     }
 
-    bool Port::Read(uint64_t sector, uint32_t sectorCount, void* buffer) {
+    // Is it up to the developer to Free() the pages once they are finished
+    void* Port::Read(uint64_t sector, uint32_t sectorCount) {
+        const uint8_t commandSlot = 0;
 
-        //hbaPort->interruptStatus = 0xFFFFFFFF; // Clear pending interrupt bits
-        GlobalRenderer->Print("0x");
-        GlobalRenderer->Print(to_hstring((uint64_t)hbaPort));
-        GlobalRenderer->Print(" \n");
+        // Start with making the buffer
+        void* buffer;
+        size_t pageCount = (sectorCount * 0x200 + PAGE_SIZE) / PAGE_SIZE;
+        buffer = GlobalAllocator.RequestPages(pageCount);
+        memset(buffer, 0, pageCount * PAGE_SIZE);
+
+        // Then read to the buffer
         uint64_t spin = 0;
 
         uint32_t sectorL = (uint32_t)sector;
@@ -148,23 +153,30 @@ namespace AHCI {
             spin++;
         }
         if (spin == 1000000) {
-            return false; // port is hung
+            GlobalAllocator.FreePages(buffer, pageCount);
+            return nullptr; // port is hung
         }
 
-        hbaPort->commandIssue |= 1;
+        hbaPort->commandIssue |= (1 << commandSlot);
 
         while (true) {
-            if ((hbaPort->commandIssue & 1) == 0) {
+            if ((hbaPort->commandIssue & (1 << commandSlot)) == 0) {
                 break;
             }
 
             if (hbaPort->interruptStatus & HBA_PxIS_TFES) {
-                return false;
+                GlobalAllocator.FreePages(buffer, pageCount);
+                return nullptr;
             }
 
         }
 
-        return true;
+        return buffer;
+    }
+
+    // TODO: Port::Write
+    bool Port::Write(uint64_t, void* buffer) {
+        return false;
     }
 
     AHCIDriver::AHCIDriver(PCI::PCIDeviceHeader* pciBaseAddress) {
@@ -183,20 +195,12 @@ namespace AHCI {
 
             port->Configure();
 
-            port->buffer = (uint8_t*)GlobalAllocator.RequestPage();
-            memset(port->buffer, 0, 0x1000);
-
-            port->Read(0, 1, port->buffer);
-            for (int t = 0; t < 1024; t++) {
-                GlobalRenderer->PutChar(port->buffer[t]);
-            }
-            GlobalRenderer->Print(" \n");
         }
     }
 
     AHCIDriver::~AHCIDriver() {
         for (int i = 0; i < portCount; i++) {
-            delete (void*)(ports[i]);
+            delete (void *)ports[i];
         }
     }
 
@@ -208,7 +212,7 @@ namespace AHCI {
                 PortType portType = CheckPortType(port);
 
                 if (portType == PortType::SATA || portType == PortType::SATAPI) {
-                    ports[portCount] = new Port();
+                    //ports[portCount] = new Port();
                     ports[portCount]->portType = portType;
                     ports[portCount]->hbaPort = port;
                     ports[portCount]->portNumber = portCount;
